@@ -18,7 +18,7 @@ const Figure = styled.figure`
     box-sizing: border-box;
     padding: 12px;
     display: flex;
-    flex-direction: column; /* Ensure elements inside figcaption align properly */
+    flex-direction: column;
     h3 {
       font-family: "GandhiSansBold";
     }

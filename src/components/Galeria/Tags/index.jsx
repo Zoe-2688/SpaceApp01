@@ -37,15 +37,24 @@ const Div = styled.div`
 `;
 
 const Tags = ({ setTag }) => {
+  // Maneja el cambio de tag
+  const handleTagChange = (nuevoTag) => {
+    console.log("Tag seleccionado:", nuevoTag);
+    setTag(nuevoTag); // Actualiza el tag en el estado del componente padre
+  };
+
   return (
     <BarraTags>
       <TituloTags>Buscar por etiquetas:</TituloTags>
       <Div>
         {tags.map(tag => (
-          <Tag key={tag.id} onClick={() => setTag(tag.tag)}>
+          <Tag key={tag.id} onClick={() => handleTagChange(tag.id)}>
             {tag.titulo}
           </Tag>
         ))}
+        <Tag key="all" onClick={() => handleTagChange(0)}>
+          Mostrar Todas
+        </Tag>
       </Div>
     </BarraTags>
   );

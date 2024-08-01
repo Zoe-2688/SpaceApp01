@@ -9,7 +9,6 @@ import Galeria from './components/Galeria';
 import fotos from './fotos.json';
 import ModalZoom from './components/ModalZoom';
 import Pie from './components/Pie';
-import Tags from "./components/Galeria/Tags";
 
 const FondoGradiente = styled.div`
   background: linear-gradient(175deg, #041833 4.16%, #04244f 48%, #154580 96.76%);
@@ -40,11 +39,10 @@ const ContenidoGaleria = styled.section`
 const App = () => {
   const [fotosDeGaleria, setFotosDeGaleria] = useState(fotos);
   const [filtro, setFiltro] = useState('');
-  const [tag, setTag] = useState(0); // Inicializa tag como null para mostrar todas las fotos
+  const [tag, setTag] = useState(0); // Inicializa tag como 0 para mostrar todas las fotos
   const [fotoSeleccionada, setFotoSeleccionada] = useState(null);
 
   useEffect(() => {
-    // Función para filtrar fotos según filtro y tag seleccionado
     const filtrarFotos = () => {
       const fotosFiltradas = fotos.filter(foto => {
         const filtroPorTag = !tag || foto.tagId === tag;
@@ -54,7 +52,7 @@ const App = () => {
       setFotosDeGaleria(fotosFiltradas);
     };
 
-    filtrarFotos(); // Llama a la función al montar y cuando cambian filtro o tag
+    filtrarFotos();
   }, [filtro, tag]);
 
   const alAlternarFavorito = (foto) => {
@@ -89,6 +87,7 @@ const App = () => {
               alSeleccionarFoto={foto => setFotoSeleccionada(foto)}
               fotos={fotosDeGaleria}
               alAlternarFavorito={alAlternarFavorito}
+              setTag={setTag} // Pasar setTag a Galeria
             />
           </ContenidoGaleria>
         </MainContainer>
@@ -99,10 +98,8 @@ const App = () => {
         alAlternarFavorito={alAlternarFavorito}
       />
       <Pie />
-      <Tags setTag={setTag} /> {/* Pasa setTag como prop al componente Tags */}
     </FondoGradiente>
   );
 };
-
 
 export default App;
